@@ -24,9 +24,11 @@ func _process(_delta):
 		laser.emit(selected_laser.global_position)
 		
 	if Input.is_action_just_pressed('secondary action') and can_grenade:
+		var grenade_markers = $GrenadeStartPosition.get_children()
+		var selected_grenade = grenade_markers[0]
 		can_grenade = false
 		$GrenadeReloadTimer.start()
-		grenade.emit()
+		grenade.emit(selected_grenade.global_position)
 
 
 func _on_timer_timeout():

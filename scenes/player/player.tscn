@@ -37,5 +37,10 @@ position = Vector2(5, -52)
 [node name="Marker2D3" type="Marker2D" parent="LaserStartPositions"]
 position = Vector2(13, -52)
 
+[node name="GrenadeStartPosition" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="GrenadeStartPosition"]
+position = Vector2(9, -54)
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GrenadeReloadTimer" to="." method="_on_grenade_reload_timer_timeout"]
