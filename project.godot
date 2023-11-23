@@ -14,6 +14,11 @@ config/name="Learning Godot"
 run/main_scene="res://scenes/levels/level.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [input]
 
 left={
