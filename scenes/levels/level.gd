@@ -12,10 +12,10 @@ func _process(_delta):
 	pass
 
 
-func _on_gate_player_entered_gate():
+func _on_gate_player_entered_gate(body):
 	print("player has entered")
 
-func _on_gate_player_exited_gate():
+func _on_gate_player_exited_gate(body):
 	print("player exited")
 
 
