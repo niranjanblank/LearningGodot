@@ -19,6 +19,7 @@ func _process(_delta):
 	# shooting laser
 	if Input.is_action_just_pressed('primary action') and can_laser:
 		can_laser = false
+		$GPUParticles2D.emitting = true
 		# randomly select marker
 		var laser_markers = $LaserStartPositions.get_children()
 		var selected_laser = laser_markers[randi() % laser_markers.size()]
