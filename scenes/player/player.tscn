@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://u7menyqkbccb"]
+[gd_scene load_steps=9 format=3 uid="uid://u7menyqkbccb"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_kw5km"]
 [ext_resource type="Texture2D" uid="uid://fjqgcryfm2dp" path="res://graphics/player/player.png" id="1_wjjk1"]
@@ -15,16 +15,19 @@ gradient = SubResource("Gradient_eoqlk")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g27jp"]
 particle_flag_disable_z = true
-spread = 6.86
+spread = 50.0
 gravity = Vector3(0, 0, 0)
-initial_velocity_min = 1200.0
-initial_velocity_max = 1500.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_min = 0.3
-scale_max = 0.8
+scale_min = 0.05
+scale_max = 0.2
 color = Color(0.337255, 1, 1, 0.541176)
 color_ramp = SubResource("GradientTexture1D_d5hyr")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uv3eu"]
+polygon = PackedVector2Array(-0.452325, -10.4495, -0.246723, -11.2855, -0.205602, -10.8675, 0.0411205, -11.7035, 0.205602, -11.7035, 0.370084, -11.2855, 0.534566, -12.1215, 0.699048, -11.7035, 0.781289, -10.4495, 0.863529, -9.19559, 1.06913, -7.52367, 1.06913, -7.10569, 1.19249, -5.43376, 1.31585, -5.43376, 1.43922, -4.5978, 1.8093, -1.25394, 1.97378, -1.67193, 2.05602, -1.67193, 2.13826, -1.25394, 2.30275, -0.417982, 2.50835, 0, 2.59059, 0.417982, 2.59059, 0.835963, 2.63171, 1.25394, 2.87843, 1.25394, 2.91955, 1.25394, 2.91955, 2.08991, 2.87843, 2.50789, 3.00179, 2.08991, 3.08403, 2.92587, 3.12515, 4.17982, 3.12515, 5.85174, 3.04291, 7.52367, 2.91955, 7.52367, 2.87843, 7.10569, 2.79619, 7.52367, 2.83731, 7.52367, 2.83731, 8.35963, 2.75507, 8.35963, 2.59059, 8.35963, 2.54947, 7.94165, 2.50835, 8.35963, 2.46723, 8.77761, 2.42611, 9.61358, 2.34387, 10.0316, 2.26162, 10.0316, 2.26162, 10.8675, 2.2205, 11.7035, 1.64482, 12.1215, 1.43922, 11.2855, 1.3981, 10.4495, 1.52146, 9.19559, 1.19249, 9.61358, 1.02801, 9.19559, 0.94577, 10.0316, 0.740168, 10.4495, 0.616807, 10.4495, 0.205602, 12.5394, -0.0411205, 12.9574, -0.246723, 13.3754, -0.370084, 13.3754, -0.616807, 12.5394, -0.781289, 10.8675, -0.781289, 10.0316, -0.90465, 8.35963, -0.94577, 7.52367, -1.06913, 6.68771, -1.15137, 5.01578, -1.11025, 4.5978, -1.11025, 3.76183, -1.23361, 2.92587, -1.31585, 0.835963, -1.31585, -1.67193, -1.31585, -3.76183, -1.23361, -5.01578, -1.15137, -5.85174, -1.11025, -7.10569, -0.986891, -8.35963, -0.781289, -9.19559, -0.657927, -8.77761, -0.616807, -8.77761, -0.575686, -9.61358, -0.534566, -10.0316)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 31
@@ -51,6 +54,7 @@ one_shot = true
 
 [node name="Marker2D" type="Marker2D" parent="LaserStartPositions"]
 position = Vector2(73, 11)
+scale = Vector2(0.651958, 0.883279)
 
 [node name="Marker2D2" type="Marker2D" parent="LaserStartPositions"]
 position = Vector2(73, 6)
@@ -66,11 +70,15 @@ position = Vector2(75, 11)
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(75, 11)
 emitting = false
-amount = 3
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_g27jp")
 texture = ExtResource("3_h7nil")
 lifetime = 0.2
 one_shot = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(24.3188, 2.39245)
+occluder = SubResource("OccluderPolygon2D_uv3eu")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="GrenadeReloadTimer" to="." method="_on_grenade_reload_timer_timeout"]
