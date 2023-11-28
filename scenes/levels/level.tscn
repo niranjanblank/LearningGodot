@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnsc7m6illeih"]
+[gd_scene load_steps=19 format=3 uid="uid://cnsc7m6illeih"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_tpwhp"]
 [ext_resource type="Texture2D" uid="uid://c1prp17jfv51o" path="res://graphics/ground/stones.png" id="2_jwqhg"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://gy8j8uhc27pl" path="res://graphics/decals/moss/moss_5.png" id="10_4dfii"]
 [ext_resource type="Texture2D" uid="uid://cd647hchbt8oe" path="res://graphics/tilesets/soil.png" id="10_r0k78"]
 [ext_resource type="PackedScene" uid="uid://fthdk3i73o7y" path="res://scenes/houses/house.tscn" id="11_gqo1y"]
+[ext_resource type="PackedScene" uid="uid://gmt0w5hop6c1" path="res://scenes/light_fan_animation.tscn" id="13_4h02m"]
 [ext_resource type="PackedScene" uid="uid://g4g620vyxdur" path="res://scenes/objects/steam_vent.tscn" id="14_mmi1i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1kvow"]
@@ -56,7 +57,7 @@ script = ExtResource("1_tpwhp")
 
 [node name="Soil" type="Sprite2D" parent="Ground"]
 texture_repeat = 2
-position = Vector2(245, -262)
+position = Vector2(237, 128)
 texture = ExtResource("2_jwqhg")
 region_enabled = true
 region_rect = Rect2(-6029.7, -854.912, 12513.6, 8543.15)
@@ -99,17 +100,25 @@ texture = ExtResource("9_ye7ss")
 position = Vector2(1791, 1767)
 texture = ExtResource("10_4dfii")
 
-[node name="Gate" parent="." instance=ExtResource("2_n41nh")]
-position = Vector2(218, -674)
-
-[node name="House" parent="." instance=ExtResource("11_gqo1y")]
-position = Vector2(-1906, 3405)
+[node name="House" parent="Ground" instance=ExtResource("11_gqo1y")]
+position = Vector2(-3641, 2770)
 rotation = -2.0944
 
-[node name="Grenades" type="Node2D" parent="."]
-
-[node name="SteamVent" parent="." instance=ExtResource("14_mmi1i")]
+[node name="SteamVent" parent="Ground" instance=ExtResource("14_mmi1i")]
 position = Vector2(0, 520)
+
+[node name="LightFanAnimation" parent="Ground" instance=ExtResource("13_4h02m")]
+position = Vector2(-3453, 668)
+autoplay = "default"
+frame = 34
+frame_progress = 0.60959
+
+[node name="Gate" parent="." instance=ExtResource("2_n41nh")]
+position = Vector2(218, -674)
+metadata/_edit_lock_ = true
+
+[node name="Grenades" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_m2lo3")]
 position = Vector2(575, 491)
@@ -119,6 +128,7 @@ zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 
 [node name="Projectiles" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
 [connection signal="player_exited_gate" from="Gate" to="." method="_on_gate_player_exited_gate"]
