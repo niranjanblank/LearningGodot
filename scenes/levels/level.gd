@@ -12,10 +12,11 @@ func _process(_delta):
 	pass
 
 
-func _on_gate_player_entered_gate(body):
-	print("player has entered")
+func _on_gate_player_entered_gate(_body):
+	var tween = create_tween()
+	tween.tween_property($Player,"speed", 0 , 0.5)
 
-func _on_gate_player_exited_gate(body):
+func _on_gate_player_exited_gate(_body):
 	print("player exited")
 
 
@@ -34,3 +35,17 @@ func _on_player_grenade(pos, direction):
 	grenade.position = pos
 	grenade.linear_velocity = direction * grenade.speed
 	$Grenades.add_child(grenade)
+
+
+func _on_house_player_entered():
+	# get the entire scene tree
+	var tween = get_tree().create_tween()
+	tween.tween_property($Player/Camera2D2, "zoom", Vector2(1,1), 1 )
+	
+
+
+
+func _on_house_player_exited():
+	var tween = get_tree().create_tween()
+	tween.tween_property($Player/Camera2D2,"zoom", Vector2(0.6,0.6), 1)
+	pass # Replace with function body.
