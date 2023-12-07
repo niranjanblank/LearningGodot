@@ -8,6 +8,7 @@ signal grenade(pos, direction)
 
 @export var max_speed: int = 500
 var speed: int = max_speed
+
 func _process(_delta):
 	
 	# input movement
@@ -19,7 +20,8 @@ func _process(_delta):
 	look_at(get_global_mouse_position())
 	
 	# shooting laser
-	if Input.is_action_just_pressed('primary action') and can_laser:
+	if Input.is_action_just_pressed('primary action') and can_laser and Globals.laser_amount > 0:
+		Globals.laser_amount -= 1
 		can_laser = false
 		$GPUParticles2D.emitting = true
 		# randomly select marker
@@ -30,7 +32,8 @@ func _process(_delta):
 		# emit the position we selected 
 		laser.emit(selected_laser.global_position, player_direction)
 		
-	if Input.is_action_just_pressed('secondary action') and can_grenade:
+	if Input.is_action_just_pressed('secondary action') and can_grenade and Globals.grenade_amount > 0:
+		Globals.grenade_amount -= 1
 		can_grenade = false
 		var grenade_markers = $GrenadeStartPosition.get_children()
 		var selected_grenade = grenade_markers[0]
